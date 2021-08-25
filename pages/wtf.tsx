@@ -4,7 +4,7 @@ import { Copy, Title } from '../components/Typography';
 import { Spacer } from '../components/Spacer';
 
 const Content = () => (
-    <Main>
+    <Main opaque>
         <Title>The Marathon Mix</Title>
         <Spacer />
         <Copy>Minima quisquam tempore molestiae fuga impedit earum. Dolor facilis doloremque tempora voluptate. Rem rerum voluptas sint consequatur in minima eos ut.</Copy>

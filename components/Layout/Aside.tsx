@@ -12,7 +12,7 @@ export const Aside = () => {
               <span className="block border-b-8 border-gt-green py-1.5">Marathon</span>
               <span className="block border-b-8 border-gt-green py-1.5">Mix</span>
             </h1>
-            <div className="h-8"></div>
+            <div className="md:hidden h-8"></div>
             <div className="md:hidden">
               <Image src={BenImage} alt="Photo of Ben ready to run while wearing the Statue of Liberty crown" layout="responsive" />
             </div>
