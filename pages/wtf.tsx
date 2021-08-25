@@ -3,7 +3,7 @@ import { Layout, Main, Aside } from '../components/Layout';
 import { Copy, Title } from '../components/Typography';
 import { Spacer } from '../components/Spacer';
 
-const Content = () => (
+const WtfContent = () => (
     <Main opaque>
         <Title>The Marathon Mix</Title>
         <Spacer />
@@ -23,7 +23,7 @@ export default function Wtf() {
             </Head>
             <Layout
                 aside={<Aside />}
-                main={<Content />}
+                main={<WtfContent />}
             />
         </div>
     );
