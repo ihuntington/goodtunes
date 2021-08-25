@@ -5,6 +5,7 @@ module.exports = {
     theme: {
         extend: {
             colors: {
+                'gt-main-opaque': 'rgba(255, 255, 255, .8)',
                 'gt-blue': '#0033ff',
                 'gt-green': '#4ce957',
                 'gt-grey': '#333333',
