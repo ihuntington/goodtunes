@@ -1,11 +1,16 @@
 import Head from 'next/head'
-import { Layout, Aside, Main } from '../components'
+import { Layout, Aside, Main, Title, Spacer, Search } from '../components'
 
-const DonateContent = () => (
-    <Main opaque>
-        <p>Donate</p>
-    </Main>
-);
+const DonateContent = () => {
+
+    return (
+        <Main opaque>
+            <Title>Donate a track</Title>
+            <Spacer size={8} />
+            <Search />
+        </Main>
+    );
+};
 
 export default function Donate() {
     return (
