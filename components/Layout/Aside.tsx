@@ -7,7 +7,7 @@ import { TextLinkButton } from '../TextLinkButton';
 export const Aside = () => {
     return (
         <>
-          <Spacer size={4} />
+          <div className="h-4"></div>
             <h1 className="text-5xl text-gt-blue">
               <span className="block border-b-8 border-gt-green py-1.5">Ben`s</span>
               <span className="block border-b-8 border-gt-green py-1.5">London</span>
@@ -22,7 +22,7 @@ export const Aside = () => {
             <p className="text-2xl">Use music and your wallet to support Ben as he runs for Stonewall.</p>
             <Spacer size={8} />
             <TextLinkButton href="/donate">Give money + music</TextLinkButton>
-            <Spacer size={4} />
+            <div className="h-4"></div>
             <Link href="/wtf">
               <a className="text-gt-blue">WTF am I doing this?</a>
             </Link>
@@ -30,9 +30,9 @@ export const Aside = () => {
             <div className="h-2 bg-gt-blue"></div>
             <Spacer size={8} />
             <p className="text-2xl">Ben`s reached</p>
-            <Spacer size={4} />
+            <div className="h-4"></div>
             <p className="text-gt-green text-5xl">$0</p>
-            <Spacer size={4} />
+            <div className="h-4"></div>
             <p>X days to go</p>
             <div className="h-8"></div>
         </>
