@@ -5,7 +5,7 @@ import { Spacer } from '../components/Spacer';
 
 const WtfContent = () => (
     <Main opaque>
-        <Title>The Marathon Mix</Title>
+        <Title>WTF?</Title>
         <Spacer />
         <Copy>Minima quisquam tempore molestiae fuga impedit earum. Dolor facilis doloremque tempora voluptate. Rem rerum voluptas sint consequatur in minima eos ut.</Copy>
         <Copy>Et doloremque veniam ea quisquam eaque a nemo. Autem aut provident quae ut doloremque. Quos voluptatum dignissimos et alias quibusdam.</Copy>

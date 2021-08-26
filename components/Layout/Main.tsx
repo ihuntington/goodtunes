@@ -1,6 +1,8 @@
+import React from "react";
 import Image from "next/image";
 import cx from "classnames";
 import BenImage from "../../public/ben.jpg"
+import LogoNavy from "../../public/logo-navy.png";
 
 export const Main: React.FC<{ opaque?: boolean }> = ({ children, opaque = false }) => {
     return (
@@ -11,9 +13,12 @@ export const Main: React.FC<{ opaque?: boolean }> = ({ children, opaque = false 
                 </div>
             </div>
             <div className={cx("col-start-1 col-end-1 row-start-1 row-end-1 z-10", { "bg-gt-main-opaque": opaque })}>
-                <div className="md:p-5">
-                    <div className="z-10">
-                        {children}
+                <div className="p-8 md:p-5">
+                    {children}
+                    {/* TODO: improve spacing between content and logo */}
+                    <div className="h-8 md:hidden"></div>
+                    <div className="flex justify-center md:hidden">
+                        <Image src={LogoNavy} alt="Good Tunes" />
                     </div>
                 </div>
             </div>
