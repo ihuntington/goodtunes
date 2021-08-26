@@ -5,9 +5,10 @@ import LogoNavy from "../public/logo-navy.png";
 
 const HomeContent = () => (
   <Main>
-    <div className="flex justify-end">
+    <div className="flex justify-center md:justify-end">
       <Image src={LogoNavy} alt="Good Tunes" />
     </div>
+    <div className="h-4 md:h-0"></div>
   </Main>
 );
 
