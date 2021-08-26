@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Spacer } from '../Spacer';
 import { TextLinkButton } from '../TextLinkButton';
+import { PlayIcon } from '../Icons';
 import BenImage from "../../public/ben.jpg";
 
 export const Aside = () => {
@@ -11,7 +12,7 @@ export const Aside = () => {
         <span className="block border-b-8 border-gt-green py-1.5">Ben`s</span>
         <span className="block border-b-8 border-gt-green py-1.5">London</span>
         <span className="block border-b-8 border-gt-green py-1.5">Marathon</span>
-        <span className="block border-b-8 border-gt-green py-1.5">Mix</span>
+        <span className="block border-b-8 border-gt-green py-1.5">Mix <PlayIcon /></span>
       </h1>
       <div className="md:hidden h-8"></div>
       <div className="md:hidden">
