@@ -1,4 +1,5 @@
-import {ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
+import { SearchIcon } from "../Icons";
 
 interface ISearchForm {
     onSubmit: (query: string) => void;
@@ -17,20 +18,22 @@ export const SearchForm: React.FC<ISearchForm> = ({ onSubmit }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <p>
-                <label htmlFor="q">Search by track name or artist</label>
+        <form onSubmit={handleSubmit} className="flex">
+            <div className="flex-1">
+                <label htmlFor="q" className="sr-only">Search by track name or artist</label>
                 <input
                     type="search"
                     id="q"
                     name="q"
-                    className="text-2xl border-b border-gt-green w-full bg-transparent"
+                    className="text-2xl p-2 border-b border-gt-green w-full bg-transparent"
                     onChange={handleChange}
                     value={query}
+                    placeholder="Search for song or artist"
                 />
-            </p>
-            <button type="submit">
-                Search
+            </div>
+            <button type="submit" className="p-2 border-b border-gt-green flex-none text-gt-blue">
+                <span className="sr-only">Search</span>
+                <SearchIcon />
             </button>
         </form>
     );
