@@ -3,13 +3,20 @@ import { SearchIcon } from "../Icons";
 
 interface ISearchForm {
     onSubmit: (query: string) => void;
+    onReset: () => void;
 }
 
-export const SearchForm: React.FC<ISearchForm> = ({ onSubmit }) => {
+export const SearchForm: React.FC<ISearchForm> = ({ onSubmit, onReset }) => {
     const [query, setQuery] = useState<string>("");
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-        setQuery(event.target.value);
+        const { value } = event.target;
+
+        setQuery(value);
+
+        if (value.length === 0) {
+            onReset();
+        }
     };
 
     const handleSubmit = (event: FormEvent) => {

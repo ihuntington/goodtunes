@@ -13,9 +13,13 @@ export const Search = () => {
         setItems(tracks);
     };
 
+    const handleReset = () => {
+        setItems([]);
+    };
+
     return (
         <>
-            <SearchForm onSubmit={handleSubmit} />
+            <SearchForm onSubmit={handleSubmit} onReset={handleReset} />
             <Spacer size={4} />
             <SearchResults items={items} />
         </>
