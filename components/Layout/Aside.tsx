@@ -4,9 +4,7 @@ import differenceInDays from "date-fns/differenceInDays";
 import { Spacer } from '../Spacer';
 import { TextLinkButton } from '../TextLinkButton';
 import { PlayIcon } from '../Icons';
-import BenImage from "../../public/ben.jpg";
-
-
+import BenImage from "../../public/ben-london-2021-portrait.jpg";
 
 export const Aside = () => {
   const targetDate = new Date(2021, 9, 3);
@@ -14,6 +12,7 @@ export const Aside = () => {
   const diff = differenceInDays(targetDate, today);
 
   return (
+    <>
     <div className="px-8 md:px-0">
       <h1 className="text-5xl text-gt-red">
         <span className="block border-b-8 border-gt-pink py-1.5">Ben`s</span>
@@ -24,10 +23,12 @@ export const Aside = () => {
           <span className="inline-block pl-1.5"><PlayIcon /></span>
         </span>
       </h1>
-      <div className="md:hidden h-8"></div>
-      <div className="md:hidden">
-        <Image src={BenImage} alt="Photo of Ben ready to run while wearing the Statue of Liberty crown" layout="responsive" />
-      </div>
+    </div>
+    <div className="md:hidden h-8"></div>
+    <div className="md:hidden">
+      <Image src={BenImage} alt="Photo of Ben ready to run while wearing the Statue of Liberty crown" layout="responsive" />
+    </div>
+    <div className="px-8 md:px-0">
       <Spacer size={8} />
       <p className="text-2xl text-gt-blue">Use music and your wallet to support Ben as he runs for Stonewall UK.</p>
       <Spacer size={8} />
@@ -48,5 +49,6 @@ export const Aside = () => {
       <p>Powered by Good Tunes</p>
       <div className="h-8"></div>
     </div>
+    </>
   );
 }

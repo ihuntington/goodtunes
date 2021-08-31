@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import cx from "classnames";
-import BenImage from "../../public/ben.jpg"
+import BenImage from "../../public/ben-london-2021-landscape.jpg"
 import LogoNavy from "../../public/logo-navy.png";
 
 export const Main: React.FC<{ opaque?: boolean }> = ({ children, opaque = false }) => {

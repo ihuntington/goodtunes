@@ -1,12 +1,14 @@
 import Head from 'next/head'
 import Image from "next/image";
 import { Aside, Layout, Main } from '../components'
-import LogoNavy from "../public/logo-navy.png";
+import GoodTunesLogo from "../public/good-tunes-white-x2.png";
 
 const HomeContent = () => (
   <Main>
     <div className="hidden md:flex justify-center md:justify-end">
-      <Image src={LogoNavy} alt="Good Tunes" />
+      <div style={{ width: "170px" }}>
+        <Image src={GoodTunesLogo} alt="Good Tunes" />
+      </div>
     </div>
   </Main>
 );
