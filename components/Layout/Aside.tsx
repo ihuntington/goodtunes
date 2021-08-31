@@ -14,14 +14,18 @@ export const Aside = () => {
   return (
     <>
     <div className="px-8 md:px-0">
-      <h1 className="text-5xl text-gt-red">
-        <span className="block border-b-8 border-gt-pink py-1.5">Ben`s</span>
-        <span className="block border-b-8 border-gt-pink py-1.5">London</span>
-        <span className="block border-b-8 border-gt-pink py-1.5">Marathon</span>
-        <span className="block border-b-8 border-gt-pink py-1.5">
-          <span>Mix</span>
-          <span className="inline-block pl-1.5"><PlayIcon /></span>
-        </span>
+      <h1 className="text-5xl">
+        <Link href="/">
+          <a className="text-gt-red focus:text-gt-pink hover:text-gt-pink">
+            <span className="block border-b-8 border-gt-pink py-1.5">Ben`s</span>
+            <span className="block border-b-8 border-gt-pink py-1.5">London</span>
+            <span className="block border-b-8 border-gt-pink py-1.5">Marathon</span>
+            <span className="block border-b-8 border-gt-pink py-1.5">
+              <span>Mix</span>
+              <span className="inline-block pl-1.5"><PlayIcon /></span>
+            </span>
+          </a>
+        </Link>
       </h1>
     </div>
     <div className="md:hidden h-8"></div>
@@ -35,7 +39,7 @@ export const Aside = () => {
       <TextLinkButton href="/donate">Give money + music</TextLinkButton>
       <div className="h-4"></div>
       <Link href="/wtf">
-        <a className="text-gt-blue underline">Why am I doing this?</a>
+        <a className="text-gt-blue focus:text-gt-light-blue hover:text-gt-light-blue underline">Why am I doing this?</a>
       </Link>
       <Spacer size={8} />
       <div className="h-2 bg-gt-blue"></div>
