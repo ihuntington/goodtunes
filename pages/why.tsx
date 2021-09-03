@@ -5,9 +5,11 @@ import { Copy } from '../components/Typography';
 import { Spacer } from '../components/Spacer';
 import { TextLinkButton } from "../components/TextLinkButton";
 
-const WtfContent = () => (
+const pageTitle = "Why am I doing this?";
+
+const WhyContent = () => (
     <Main opaque>
-        <h2 className="text-5xl text-gt-violet">Why am I doing this?</h2>
+        <h2 className="text-5xl text-gt-violet">{pageTitle}</h2>
         <Link href="/">
             <a className="text-gt-blue focus:text-gt-light-blue hover:text-gt-light-blue absolute top-2 right-2 md:top-4 md:right-4">
                 <span className="sr-only">To the home page</span>
@@ -28,17 +30,17 @@ const WtfContent = () => (
     </Main>
 );
 
-export default function Wtf() {
+export default function Why() {
     return (
         <div className="container mx-auto h-full">
             <Head>
-                <title>WTF am I doing this?</title>
+                <title>{pageTitle}</title>
                 <meta name="description" content="Good Tunes" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <Layout
                 aside={<Aside hide />}
-                main={<WtfContent />}
+                main={<WhyContent />}
             />
         </div>
     );
