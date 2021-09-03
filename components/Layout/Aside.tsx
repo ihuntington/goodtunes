@@ -5,6 +5,7 @@ import { Spacer } from '../Spacer';
 import { TextLinkButton } from '../TextLinkButton';
 import { PlayIcon } from '../Icons';
 import BenImage from "../../public/ben-london-2021-portrait.jpg";
+import { Totaliser } from '../Totaliser';
 
 export const Aside = ({ hide = false }) => {
   const targetDate = new Date(2021, 9, 3);
@@ -44,11 +45,7 @@ export const Aside = ({ hide = false }) => {
         <Spacer size={8} />
         <div className="h-2 bg-gt-blue"></div>
         <Spacer size={8} />
-        <p className="text-2xl text-gt-green">Ben`s reached...</p>
-        <div className="h-4"></div>
-        <p className="text-5xl text-gt-green">£0</p>
-        <div className="h-4"></div>
-        <p className="text-gt-green">{`${diff} days to go`}</p>
+        <Totaliser />
         <div className="h-8"></div>
         <p>Powered by Good Tunes</p>
         <div className="h-8"></div>
