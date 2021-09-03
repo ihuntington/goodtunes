@@ -12,7 +12,7 @@ export const Main: React.FC<{ opaque?: boolean }> = ({ children, opaque = false 
                     <Image layout="fill" objectFit="cover" src={BenImage} alt="Photo of Ben ready to run while wearing the Statue of Liberty crown" />
                 </div>
             </div>
-            <div className={cx("col-start-1 col-end-1 row-start-1 row-end-1 z-10", { "bg-gt-main-opaque": opaque })}>
+            <div className={cx("col-start-1 col-end-1 row-start-1 row-end-1 z-10 relative", { "bg-gt-main-opaque": opaque })}>
                 <div className="p-8 md:p-5">
                     {children}
                     {/* TODO: improve spacing between content and logo */}

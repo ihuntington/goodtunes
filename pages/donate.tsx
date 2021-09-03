@@ -21,7 +21,7 @@ export default function Donate() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <Layout
-                aside={<Aside />}
+                aside={<Aside hide />}
                 main={<DonateContent />}
             />
         </div>
