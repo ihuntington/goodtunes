@@ -38,7 +38,7 @@ export const Aside = ({ hide = false }) => {
         <Spacer size={8} />
         <TextLinkButton href="/donate">Give money + music</TextLinkButton>
         <div className="h-4"></div>
-        <Link href="/wtf">
+        <Link href="/why">
           <a className="text-gt-blue focus:text-gt-light-blue hover:text-gt-light-blue underline">Why am I doing this?</a>
         </Link>
         <Spacer size={8} />
