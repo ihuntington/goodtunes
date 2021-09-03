@@ -15,7 +15,7 @@ const HomeContent = () => (
 
 export default function Home() {
   return (
-    <div className="container mx-auto h-full">
+    <>
       <Head>
         <title>Good Tunes</title>
         <meta name="description" content="Good Tunes" />
@@ -25,6 +25,6 @@ export default function Home() {
         aside={<Aside />}
         main={<HomeContent />}
       />
-    </div>
-  )
+    </>
+  );
 }

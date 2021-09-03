@@ -32,7 +32,7 @@ const WhyContent = () => (
 
 export default function Why() {
     return (
-        <div className="container mx-auto h-full">
+        <>
             <Head>
                 <title>{pageTitle}</title>
                 <meta name="description" content="Good Tunes" />
@@ -42,6 +42,6 @@ export default function Why() {
                 aside={<Aside hide />}
                 main={<WhyContent />}
             />
-        </div>
+        </>
     );
 }

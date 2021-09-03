@@ -14,7 +14,7 @@ const DonateContent = () => {
 
 export default function Donate() {
     return (
-        <div className="container mx-auto h-full">
+        <>
             <Head>
                 <title>Donate a track</title>
                 <meta name="description" content="Good Tunes" />
@@ -24,6 +24,6 @@ export default function Donate() {
                 aside={<Aside hide />}
                 main={<DonateContent />}
             />
-        </div>
+        </>
     );
 }
