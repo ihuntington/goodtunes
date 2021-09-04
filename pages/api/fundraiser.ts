@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import fetch from "node-fetch";
+import urljoin from "url-join";
 
 interface JustGivingFundraiserResponse {
     currencySymbol: string;
@@ -15,18 +16,12 @@ export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse,
 ) {
-    const apiKey = process.env.JUST_GIVING_API_KEY;
-
-    if (!apiKey) {
-        res.status(400).send("");
-        return;
-    }
-
     try {
-        const url = "https://api.justgiving.com/v1/fundraising/pages/benjamin-schwab1";
+        const url = urljoin(process.env.JUST_GIVING_API_URL as string, "v1/fundraising/pages/benjamin-schwab1");
+        // const url = "https://api.justgiving.com/v1/fundraising/pages/benjamin-schwab1";
         const response = await fetch (url, {
             headers: {
-                "x-api-key": apiKey,
+                "x-api-key": process.env.JUST_GIVING_API_KEY as string,
                 "Content-Type": "application/json",
             },
         });

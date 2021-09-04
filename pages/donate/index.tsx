@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { Layout, Aside, Main, Title, Spacer, Search } from '../components'
+import { Layout, Aside, Main, Title, Spacer, Search } from '../../components'
 
 const DonateContent = () => {
 
