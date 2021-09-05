@@ -11,42 +11,18 @@ generator client {
 }
 
 model User {
-  id       Int        @id @default(autoincrement())
-  email    String     @unique
-  name     String
-  Playlist Playlist[]
-  Track    Track[]
-  Donation Donation[]
-}
-
-model Playlist {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  spotifyId String   @db.VarChar(255)
-  user      User     @relation(fields: [userId], references: [id])
-  userId    Int
-  Track     Track[]
-}
-
-model Track {
-  id         Int      @id @default(autoincrement())
-  createdAt  DateTime @default(now())
-  spotifyId  String   @db.VarChar(255)
-  track      Json
-  playlist   Playlist @relation(fields: [playlistId], references: [id])
-  playlistId Int
-  user       User     @relation(fields: [userId], references: [id])
-  userId     Int
-  donation   Donation @relation(fields: [donationId], references: [id])
-  donationId Int
+  id         Int    @id @default(autoincrement())
+  spotifyId  String @db.VarChar(255)
+  spotifyUri String @db.VarChar(255)
+  token      Json
 }
 
 model Donation {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  user      User     @relation(fields: [userId], references: [id])
-  userId    Int
-  value     Decimal
-  Track     Track[]
+  id                   Int      @id @default(autoincrement())
+  createdAt            DateTime @default(now())
+  justGivingDonationId Int
+  justGivingReference  String
+  name                 String
+  spotifyTrackId       String
+  amount               String
 }
