@@ -6,6 +6,7 @@ import { useSearch } from "./useSearch";
 
 export const Search = () => {
     const [items, setItems] = useState<any[]>([]);
+    const [selected, setSelected] = useState<string>("");
     const { searchTracks } = useSearch();
 
     const handleSubmit = async (query: string) => {
@@ -17,11 +18,15 @@ export const Search = () => {
         setItems([]);
     };
 
+    const handleSelect = (id: string) => {
+        setSelected(id);
+    };
+
     return (
         <>
             <SearchForm onSubmit={handleSubmit} onReset={handleReset} />
             <Spacer size={4} />
-            <SearchResults items={items} />
+            <SearchResults items={items} onSelect={handleSelect} selectedId={selected} />
         </>
     );
 };

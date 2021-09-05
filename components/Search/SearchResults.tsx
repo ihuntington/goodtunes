@@ -17,6 +17,12 @@ interface ISearchResultItem extends ITrack {
     selected: boolean;
 }
 
+interface ISearchResults {
+    items: ITrack[];
+    onSelect: (id: string) => void;
+    selectedId: string;
+}
+
 const Artists = ({ artists }: { artists: IArtist[] }) => (
     <>
         {artists.map(({ id, name }) => (
@@ -41,17 +47,11 @@ const SearchResultItem: React.FC<ISearchResultItem> = ({ artists, name, id, onCl
     );
 };
 
-export const SearchResults: React.FC<{ items: ITrack[] }> = ({ items }) => {
-    const [selected, setSelected] = useState<string | null>(null);
-
-    const handleSelect = (id: string) => {
-        setSelected(id);
-    };
-
+export const SearchResults: React.FC<ISearchResults> = ({ items, onSelect, selectedId }) => {
     return (
         <table className="md:table-auto w-full">
             <tbody className="text-gt-blue flex flex-col md:table-row-group">
-            {items.map(({ artists, name, id }) => <SearchResultItem key={id} artists={artists} name={name} id={id} onClick={handleSelect} selected={selected === id} />)}
+            {items.map(({ artists, name, id }) => <SearchResultItem key={id} artists={artists} name={name} id={id} onClick={onSelect} selected={selectedId === id} />)}
             </tbody>
         </table>
     );
