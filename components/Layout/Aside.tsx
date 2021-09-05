@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import differenceInDays from "date-fns/differenceInDays";
 import { Spacer } from '../Spacer';
 import { TextLinkButton } from '../TextLinkButton';
 import { PlayIcon } from '../Icons';
@@ -8,17 +7,13 @@ import BenImage from "../../public/ben-london-2021-portrait.jpg";
 import { Totaliser } from '../Totaliser';
 
 export const Aside = ({ hide = false }) => {
-  const targetDate = new Date(2021, 9, 3);
-  const today = new Date();
-  const diff = differenceInDays(targetDate, today);
-
   return (
     <div className={hide ? "hidden md:block" : "block" }>
       <div className="px-8 md:px-0">
         <h1 className="text-5xl">
-          <Link href="/">
+          <Link href="/mix">
             <a className="text-gt-red focus:text-gt-pink hover:text-gt-pink">
-              <span className="block border-b-8 border-gt-pink py-1.5">Ben`s</span>
+              <span className="block border-b-8 border-gt-pink py-1.5">Ben’s</span>
               <span className="block border-b-8 border-gt-pink py-1.5">London</span>
               <span className="block border-b-8 border-gt-pink py-1.5">Marathon</span>
               <span className="block border-b-8 border-gt-pink py-1.5">
