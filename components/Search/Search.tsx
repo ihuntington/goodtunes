@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { Spacer } from "../Spacer";
 import { SearchResults } from "./SearchResults";
 import { SearchForm } from "./SearchForm";
 import { useSearch } from "./useSearch";
+import { TextLinkButton } from "../TextLinkButton";
 
 export const Search = () => {
     const [items, setItems] = useState<any[]>([]);
@@ -16,6 +17,7 @@ export const Search = () => {
 
     const handleReset = () => {
         setItems([]);
+        setSelected("");
     };
 
     const handleSelect = (id: string) => {
@@ -27,6 +29,11 @@ export const Search = () => {
             <SearchForm onSubmit={handleSubmit} onReset={handleReset} />
             <Spacer size={4} />
             <SearchResults items={items} onSelect={handleSelect} selectedId={selected} />
+            {!!selected && (
+                <div className="absolute bottom-0 left-0 p-8 flex justify-end bg-white w-full">
+                    <TextLinkButton href={`/donate/confirm?spotifyId=${selected}`}>Continue</TextLinkButton>
+                </div>
+            )}
         </>
     );
 };
