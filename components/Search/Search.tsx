@@ -28,9 +28,11 @@ export const Search = () => {
         <>
             <SearchForm onSubmit={handleSubmit} onReset={handleReset} />
             <Spacer size={4} />
-            <SearchResults items={items} onSelect={handleSelect} selectedId={selected} />
+            <div className="overflow-y-scroll pb-24">
+                <SearchResults items={items} onSelect={handleSelect} selectedId={selected} />
+            </div>
             {!!selected && (
-                <div className="absolute bottom-0 left-0 p-8 flex justify-end bg-white w-full">
+                <div className="absolute bottom-0 left-0 py-8 flex justify-center bg-white md:bg-transparent w-full">
                     <TextLinkButton href={createJustGivingLink(selected)}>Donate with Just Giving</TextLinkButton>
                 </div>
             )}

@@ -4,7 +4,7 @@ import cx from "classnames";
 import BenImage from "../../public/ben-london-2021-landscape.jpg"
 import LogoNavy from "../../public/logo-navy.png";
 
-export const Main: React.FC<{ opaque?: boolean }> = ({ children, opaque = false }) => {
+export const Main: React.FC<{ opaque?: boolean, showLogo?: boolean }> = ({ children, opaque = false, showLogo = true }) => {
     return (
         <div className="grid grid-cols-1">
             <div className="col-start-1 col-end-1 row-start-1 row-end-1 z-0">
@@ -16,10 +16,14 @@ export const Main: React.FC<{ opaque?: boolean }> = ({ children, opaque = false 
                 <div className="p-8 md:p-5">
                     {children}
                     {/* TODO: improve spacing between content and logo */}
-                    <div className="h-8 md:hidden"></div>
-                    <div className="flex justify-center md:hidden">
-                        <Image src={LogoNavy} alt="Good Tunes" />
-                    </div>
+                    {showLogo && (
+                        <>
+                            <div className="h-8 md:hidden"></div>
+                            <div className="flex justify-center md:hidden">
+                                <Image src={LogoNavy} alt="Good Tunes" />
+                            </div>
+                        </>
+                    )}
                 </div>
             </div>
         </div>
