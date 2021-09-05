@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from "react";
 import { Spacer } from "../Spacer";
-import { SearchResults } from "./SearchResults";
+import { SearchResults, ITrack } from "./SearchResults";
 import { SearchForm } from "./SearchForm";
 import { useSearch } from "./useSearch";
 import { TextLinkButton } from "../TextLinkButton";
@@ -8,7 +8,7 @@ import { TextLinkButton } from "../TextLinkButton";
 export const Search = () => {
     const [items, setItems] = useState<any[]>([]);
     const [selected, setSelected] = useState<string>("");
-    const { searchTracks } = useSearch();
+    const { searchTracks, createJustGivingLink } = useSearch();
 
     const handleSubmit = async (query: string) => {
         const tracks = await searchTracks(query);
@@ -20,8 +20,8 @@ export const Search = () => {
         setSelected("");
     };
 
-    const handleSelect = (id: string) => {
-        setSelected(id);
+    const handleSelect = (track: ITrack) => {
+        setSelected(track.id);
     };
 
     return (
@@ -31,7 +31,7 @@ export const Search = () => {
             <SearchResults items={items} onSelect={handleSelect} selectedId={selected} />
             {!!selected && (
                 <div className="absolute bottom-0 left-0 p-8 flex justify-end bg-white w-full">
-                    <TextLinkButton href={`/donate/confirm?spotifyId=${selected}`}>Continue</TextLinkButton>
+                    <TextLinkButton href={createJustGivingLink(selected)}>Donate with Just Giving</TextLinkButton>
                 </div>
             )}
         </>

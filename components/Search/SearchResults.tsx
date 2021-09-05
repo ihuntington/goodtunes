@@ -1,25 +1,25 @@
 import React, { useState } from "react";
 import cx from "classnames";
 
-interface IArtist {
+export interface IArtist {
     id: string;
     name: string;
 }
 
-interface ITrack {
+export interface ITrack {
     artists: IArtist[];
     id: string;
     name: string;
 }
 
 interface ISearchResultItem extends ITrack {
-    onClick: (id: string) => void;
+    onClick: ({ id, artists, name }: ITrack) => void;
     selected: boolean;
 }
 
 interface ISearchResults {
     items: ITrack[];
-    onSelect: (id: string) => void;
+    onSelect: ({ id, artists, name }: ITrack) => void;
     selectedId: string;
 }
 
@@ -38,7 +38,7 @@ const SearchResultItem: React.FC<ISearchResultItem> = ({ artists, name, id, onCl
     });
 
     return (
-        <tr className={classNames} onClick={() => onClick(id)}>
+        <tr className={classNames} onClick={() => onClick({ artists, name, id })}>
             <td className="text-2xl font-bold md:w-3/4 pt-2 md:pb-2 pl-2 pr-2 md:pr-0">{name}</td>
             <td className="text-2xl w-full md:w-1/4 pb-2 md:pt-2 pr-2 pl-2 md:pl-0 md:text-right">
                 <Artists artists={artists} />
