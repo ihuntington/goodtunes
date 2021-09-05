@@ -5,7 +5,7 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                'gt-main-opaque': 'rgba(255, 255, 255, .8)',
+                'gt-main-opaque': 'rgba(255, 255, 255, .95)',
                 'gt-red': '#ff0000',
                 'gt-orange': '#ff9a00',
                 'gt-yellow': '#fffc00',
