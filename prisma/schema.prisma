@@ -12,7 +12,7 @@ generator client {
 
 model User {
   id         Int    @id @default(autoincrement())
-  spotifyId  String @db.VarChar(255)
+  spotifyId  String @unique @db.VarChar(255)
   spotifyUri String @db.VarChar(255)
   token      Json
 }
@@ -20,8 +20,8 @@ model User {
 model Donation {
   id                   Int      @id @default(autoincrement())
   createdAt            DateTime @default(now())
-  justGivingDonationId Int
-  justGivingReference  String
+  justGivingDonationId Int      @unique
+  justGivingReference  String   @unique
   name                 String
   spotifyTrackId       String
   amount               String
