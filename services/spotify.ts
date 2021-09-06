@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import fetch from "node-fetch";
 import urljoin from "url-join";
 
-type SpotifyToken = {
+export type SpotifyToken = {
     access_token: string;
     token_type: string;
     expires_in: number;
@@ -14,12 +14,40 @@ export const authorize = (req: NextApiRequest, res: NextApiResponse) => {
     const clientId = process.env.SPOTIFY_CLIENT_ID;
     const redirectUri = urljoin(process.env.SPOTIFY_REDIRECT_URL as string, "/api/auth/spotify");
     // A space-separated list of scopes
-    const scope = "playlist-modify-public";
+    const scope = "playlist-modify-public playlist-modify-private";
     const url = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=code&redirect_uri=${redirectUri}&scope=${scope}`;
 
     res.writeHead(200, { "Content-Type": "text/html" });
     res.write("<meta http-equiv=\"refresh\" content=\"time; URL=" + url + "\" />");
     res.end();
+};
+
+export const refreshToken = async (token: SpotifyToken) => {
+    try {
+        const encodedIdSecret = Buffer.from(`${process.env.SPOTIFY_CLIENT_ID}:${process.env.SPOTIFY_CLIENT_SECRET}`, "utf-8").toString("base64");
+
+        const params = new URLSearchParams();
+        params.set("grant_type", "refresh_token");
+        params.set("refresh_token", token.refresh_token);
+
+        const response = await fetch("https://accounts.spotify.com/api/token", {
+            method: "POST",
+            headers: {
+                "Authorization": `Basic ${encodedIdSecret}`,
+            },
+            body: params,
+        });
+
+        if (response.ok) {
+            return await response.json() as SpotifyToken;
+        }
+
+        return null;
+    } catch (err) {
+        console.log("Failed to request refresh token");
+        console.error(err);
+        return null;
+    }
 };
 
 export const getToken = async (code: string) => {
@@ -57,7 +85,6 @@ export const getToken = async (code: string) => {
 export const getUserProfile = async ({ token }: { token: string }) => {
     try {
         const url = urljoin(process.env.SPOTIFY_API_URL as string, "/v1/me");
-        console.log("url", url);
         const response = await fetch(url, {
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -65,7 +92,6 @@ export const getUserProfile = async ({ token }: { token: string }) => {
         });
 
         if (!response.ok) {
-            const t = await response.json();
             return null;
         }
 
@@ -77,6 +103,28 @@ export const getUserProfile = async ({ token }: { token: string }) => {
     }
 };
 
-// export const getTrack = async (id: string) => {
+export const addTrackToPlaylist = async ({ token, trackId }: { token: string; trackId: string }) => {
+    try {
+        const url = urljoin(process.env.SPOTIFY_API_URL as string, "/v1/playlists/", process.env.SPOTIFY_PLAYLIST_ID as string, "/tracks");
+        const response = await fetch(url, {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ uris: [`spotify:track:${trackId}`] }),
+        });
 
-// }
+        if (!response.ok) {
+            return null
+        }
+
+        const data = await response.json();
+
+        return data;
+    } catch (err) {
+        console.log("Failed to add items to playlist");
+        console.error(err);
+        return null;
+    }
+};

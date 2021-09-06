@@ -2,6 +2,7 @@ import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { Layout, Aside, Main, Title, Spacer, Copy } from "../../components";
 import { getDonationById, DonationResponse } from "../../services/justgiving";
+import * as Spotify from "../../services/spotify";
 import prisma from "../../lib/prisma";
 
 interface IDonateThankYou {
@@ -67,7 +68,29 @@ export const getServerSideProps: GetServerSideProps = async ({ query, req }) => 
         },
     });
 
+    const user = await prisma.user.findFirst({
+        where: {
+            spotifyId: process.env.SPOTIFY_USER_ID as string,
+        },
+    });
 
+    if (user) {
+        const token = await Spotify.refreshToken(user.token as Spotify.SpotifyToken);
+
+        await prisma.user.update({
+            where: {
+                id: user.id,
+            },
+            data: {
+                token: {
+                    ...(user.token as {}),
+                    access_token: token?.access_token,
+                },
+            },
+        });
+
+        await Spotify.addTrackToPlaylist({ token: user.token.access_token, trackId: spotifyId as string });
+    }
 
     return {
         props: {
