@@ -32,9 +32,9 @@ export const getDonationById = async (id: string) => {
             return null;
         }
 
-        return await response.json();
+        return await response.json() as DonationResponse;
     } catch (err) {
-        console.info("Failed to fetch donation by ID");
+        console.info("Failed to fetch donation by ID:", id);
         console.error(err);
         return null;
     }
