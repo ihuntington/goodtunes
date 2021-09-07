@@ -10,6 +10,8 @@ export type SpotifyToken = {
     scope: string;
 }
 
+// type AccessToken = { token: string };
+
 export const authorize = (req: NextApiRequest, res: NextApiResponse) => {
     const clientId = process.env.SPOTIFY_CLIENT_ID;
     const redirectUri = urljoin(process.env.SPOTIFY_REDIRECT_URL as string, "/api/auth/spotify");
@@ -129,4 +131,7 @@ export const addTrackToPlaylist = async ({ token, trackId }: { token: string; tr
     }
 };
 
-export const getPlaylist =
+// export const getPlaylist = async ({ token, playlistId }: AccessToken & { playlistId: string }) => {
+//     const url = urljoin(process.env.SPOTIFY_API_URL as string, "/v1/playlists/", process.env.SPOTIFY_PLAYLIST_ID as string, "/tracks");
+
+// };
