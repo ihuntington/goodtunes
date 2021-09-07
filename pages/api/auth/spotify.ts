@@ -8,6 +8,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         const token = await Spotify.getToken(req.query.code as string);
 
         if (!token) {
+            console.info("No Spotify token");
             res.status(400).send("");
             return;
         }
@@ -15,11 +16,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         const profile = await Spotify.getUserProfile({ token: token.access_token });
 
         if (!profile) {
+            console.info("No Spotify profile");
             res.status(400).send("");
             return;
         }
 
         try {
+            console.info("Spotify Auth upsert user");
             await prisma.user.upsert({
                 create: {
                     spotifyId: profile.id,
@@ -38,6 +41,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
             const redirectUrl = urljoin(process.env.SPOTIFY_REDIRECT_URL as string, "/login/success");
 
+            console.info("Spotify Auth redirect to success", redirectUrl);
             res.writeHead(200, { "Content-Type": "text/html" });
             res.write("<meta http-equiv=\"refresh\" content=\"time; URL=" + redirectUrl + "\" />");
             res.end();

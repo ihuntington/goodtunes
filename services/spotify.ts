@@ -13,12 +13,13 @@ export type SpotifyToken = {
 type AccessToken = { token: string };
 
 export const authorize = (req: NextApiRequest, res: NextApiResponse) => {
+    console.info("Spotify.Authorize");
     const clientId = process.env.SPOTIFY_CLIENT_ID;
     const redirectUri = urljoin(process.env.SPOTIFY_REDIRECT_URL as string, "/api/auth/spotify");
     // A space-separated list of scopes
     const scope = "playlist-modify-public playlist-modify-private playlist-read-private";
     const url = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=code&redirect_uri=${redirectUri}&scope=${scope}`;
-
+    console.info("Spotify.Authorize Redirect URI", redirectUri);
     res.writeHead(200, { "Content-Type": "text/html" });
     res.write("<meta http-equiv=\"refresh\" content=\"time; URL=" + url + "\" />");
     res.end();
@@ -53,6 +54,7 @@ export const refreshToken = async (token: SpotifyToken) => {
 };
 
 export const getToken = async (code: string) => {
+    console.info("Spotify.getToken");
     try {
         const redirectUri = urljoin(process.env.SPOTIFY_REDIRECT_URL as string, "/api/auth/spotify");
         const url = "https://accounts.spotify.com/api/token";
@@ -76,6 +78,7 @@ export const getToken = async (code: string) => {
             return data;
         }
 
+        console.info("Failed Spotify.getToken");
         return null
     } catch (err) {
         console.log("Failed to request access and refresh tokens");
@@ -205,8 +208,6 @@ export const getPlaylist = async ({ token, playlistId }: AccessToken & { playlis
                 Authorization: `Bearer ${token}`,
             },
         });
-
-        console.log(response);
 
         if (response.ok) {
             return await response.json();
