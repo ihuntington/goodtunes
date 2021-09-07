@@ -10,13 +10,13 @@ export type SpotifyToken = {
     scope: string;
 }
 
-// type AccessToken = { token: string };
+type AccessToken = { token: string };
 
 export const authorize = (req: NextApiRequest, res: NextApiResponse) => {
     const clientId = process.env.SPOTIFY_CLIENT_ID;
     const redirectUri = urljoin(process.env.SPOTIFY_REDIRECT_URL as string, "/api/auth/spotify");
     // A space-separated list of scopes
-    const scope = "playlist-modify-public playlist-modify-private playlist-read-public playlist-read-private";
+    const scope = "playlist-modify-public playlist-modify-private playlist-read-private";
     const url = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=code&redirect_uri=${redirectUri}&scope=${scope}`;
 
     res.writeHead(200, { "Content-Type": "text/html" });
@@ -131,7 +131,91 @@ export const addTrackToPlaylist = async ({ token, trackId }: { token: string; tr
     }
 };
 
-// export const getPlaylist = async ({ token, playlistId }: AccessToken & { playlistId: string }) => {
-//     const url = urljoin(process.env.SPOTIFY_API_URL as string, "/v1/playlists/", process.env.SPOTIFY_PLAYLIST_ID as string, "/tracks");
+// export class Spotify {
+//     _token: SpotifyToken;
 
-// };
+//     constructor(token: SpotifyToken) {
+//         this._token = token;
+//     }
+
+//     get headers() {
+//         return {
+//             Authorization: `Bearer ${this._token.access_token}`,
+//         };
+//     }
+
+//     async request({ method, url, headers }: { method: "GET" | "POST", url: string, headers?: { [k: string]: string }}) {
+//         try {
+//             const response = await fetch(url, {
+//                 headers: headers || this.headers,
+//             });
+
+//             if (response.ok) {
+//                 return await response.json();
+//             }
+
+//             return null;
+//         } catch (err) {
+//             console.log(`Request failed ${method} ${url}`);
+//             console.error(err);
+//             return null;
+//         }
+//     }
+
+//     async refreshToken() {
+//         const encodedIdSecret = Buffer.from(`${process.env.SPOTIFY_CLIENT_ID}:${process.env.SPOTIFY_CLIENT_SECRET}`, "utf-8").toString("base64");
+
+//         const params = new URLSearchParams();
+//         params.set("grant_type", "refresh_token");
+//         params.set("refresh_token", this._token.refresh_token);
+
+//         const response = await this.request({
+//             method: "POST",
+//             url: "https://accounts.spotify.com/api/token",
+//             headers: {
+//                 Authorization: `Basic ${encodedIdSecret}`,
+//             },
+//         });
+
+//         return response;
+//     }
+
+//     async getPlaylist(playlistId: string) {
+//         const params = new URLSearchParams();
+//         params.append("fields", "tracks.items(track(name, artists(name)))");
+
+//         const url = urljoin(process.env.SPOTIFY_API_URL as string, "/v1/playlists/", playlistId, `${params.toString()}`);
+
+//         const response = await this.request({
+//             method: "GET",
+//             url,
+//         });
+//     }
+// }
+
+export const getPlaylist = async ({ token, playlistId }: AccessToken & { playlistId: string }) => {
+    const params = new URLSearchParams();
+    params.append("fields", "tracks.items(track(name, artists(name)))");
+
+    const url = urljoin(process.env.SPOTIFY_API_URL as string, "/v1/playlists/", playlistId, `?${params.toString()}`);
+
+    try {
+        const response = await fetch(url, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+
+        console.log(response);
+
+        if (response.ok) {
+            return await response.json();
+        }
+
+        return null;
+    } catch (err) {
+        console.log("Failed to get playlist");
+        console.error(err);
+        return null;
+    }
+};

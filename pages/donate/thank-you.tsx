@@ -89,7 +89,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query, req }) => 
             },
         });
 
-        await Spotify.addTrackToPlaylist({ token: (user?.token as Spotify.SpotifyToken).access_token, trackId: spotifyId as string });
+        await Spotify.addTrackToPlaylist({ token: token?.access_token as string, trackId: spotifyId as string });
     }
 
     return {
