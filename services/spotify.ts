@@ -21,7 +21,7 @@ export const authorize = (req: NextApiRequest, res: NextApiResponse) => {
     const url = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=code&redirect_uri=${redirectUri}&scope=${scope}`;
     console.info("Spotify.Authorize Redirect URI", redirectUri);
     res.writeHead(200, { "Content-Type": "text/html" });
-    res.write("<meta http-equiv=\"refresh\" content=\"time; URL=" + url + "\" />");
+    res.write(`<html><head><meta http-equiv="refresh" content="0; URL='${url}'" /></head><body></body></html>`);
     res.end();
 };
 
