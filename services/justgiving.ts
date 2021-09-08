@@ -25,6 +25,7 @@ export const getDonationById = async (id: string) => {
         const response = await fetch(url, {
             headers: {
                 "x-api-key": process.env.JUST_GIVING_API_KEY as string,
+                "Content-Type": "application/json",
             },
         });
 
