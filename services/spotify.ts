@@ -17,7 +17,7 @@ export const authorize = (req: NextApiRequest, res: NextApiResponse) => {
     const clientId = process.env.SPOTIFY_CLIENT_ID;
     const redirectUri = urljoin(process.env.SPOTIFY_REDIRECT_URL as string, "/api/auth/spotify");
     // A space-separated list of scopes
-    const scope = "playlist-modify-public playlist-modify-private playlist-read-private";
+    const scope = "playlist-modify-public playlist-modify-private playlist-read-private playlist-read-collaborative";
     const url = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=code&redirect_uri=${redirectUri}&scope=${scope}`;
     console.info("Spotify.Authorize Redirect URI", redirectUri);
     res.writeHead(200, { "Content-Type": "text/html" });
