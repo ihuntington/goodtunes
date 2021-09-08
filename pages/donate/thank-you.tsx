@@ -1,6 +1,6 @@
 import { GetServerSideProps } from "next";
 import Head from "next/head";
-import { Main, Title, Spacer, Copy } from "../../components";
+import { Main, Title, Spacer, Copy, CloseButton } from "../../components";
 import { getDonationById, DonationResponse } from "../../services/justgiving";
 import * as Spotify from "../../services/spotify";
 import prisma from "../../lib/prisma";
@@ -19,6 +19,7 @@ export default function DonateThankYou({ donation }: IDonateThankYou) {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <Title>{pageTitle}</Title>
+            <CloseButton />
             <Spacer size={8} />
             <Copy>See your track on the marathon mix or how about having a listen too!</Copy>
         </Main>

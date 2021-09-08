@@ -8,7 +8,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
 
   return (
-    <Layout aside={router.pathname == "/" && <Aside />}>
+    <Layout aside={<Aside hide={router.pathname != "/"} />}>
       <Component {...pageProps} />
     </Layout>
   );

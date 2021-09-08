@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { Main, Title, Spacer, Search } from '../../components'
+import { Main, Title, Spacer, Search, CloseButton } from '../../components'
 
 export default function Donate() {
     const pageTitle = "Donate a track";
@@ -12,6 +12,7 @@ export default function Donate() {
             </Head>
             <div className="overflow-hidden flex flex-col" style={{ height: "calc(100vh - 80px)" }}>
                 <Title>{pageTitle}</Title>
+                <CloseButton />
                 <Spacer size={8} />
                 <Search />
             </div>

@@ -1,6 +1,6 @@
 import { GetServerSideProps } from "next";
 import Head from 'next/head'
-import { Main, Spacer } from '../components'
+import { Main, Spacer, CloseButton } from '../components'
 import * as Spotify from "../services/spotify";
 import prisma from "../lib/prisma";
 
@@ -51,6 +51,7 @@ export default function Mix({ playlist }: IMix) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <h2 className="text-5xl text-gt-orange">{pageTitle}</h2>
+      <CloseButton />
       <Spacer size={8} />
       <table className="md:table-auto w-full">
           <tbody className="flex flex-col md:table-row-group">
