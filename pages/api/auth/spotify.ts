@@ -43,7 +43,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
             console.info("Spotify Auth redirect to success", redirectUrl);
             res.writeHead(200, { "Content-Type": "text/html" });
-            res.write("<meta http-equiv=\"refresh\" content=\"time; URL=" + redirectUrl + "\" />");
+            res.write(`<html><head><meta http-equiv="refresh" content="0; URL='${redirectUrl}'" /></head><body></body></html>`);
             res.end();
 
             return;
