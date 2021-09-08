@@ -1,6 +1,6 @@
 import { GetServerSideProps } from "next";
 import Head from 'next/head'
-import { Aside, Layout, Main, Spacer } from '../components'
+import { Main, Spacer } from '../components'
 import * as Spotify from "../services/spotify";
 import prisma from "../lib/prisma";
 
@@ -21,7 +21,6 @@ interface IMix {
   }[];
 }
 
-
 const Artists = ({ artists }: { artists: IArtist[] }) => (
   <>
     {artists.map(({ id, name }) => (
@@ -41,33 +40,24 @@ const TrackListItem: React.FC<ITrack> = ({ artists, name }) => {
   );
 };
 
-const MixContent = ({ items }: { items: { track: ITrack }[] }) => {
-  return (
-  <Main opaque>
-    <h2 className="text-5xl text-gt-orange">The Marathon Mix</h2>
-    <Spacer size={8} />
-    <table className="md:table-auto w-full">
-        <tbody className="flex flex-col md:table-row-group">
-        {items.map(({ track }) => <TrackListItem key={track.id} artists={track.artists} name={track.name} id={track.id} />)}
-        </tbody>
-    </table>
-  </Main>
-  );
-};
+export default function Mix({ playlist }: IMix) {
+  const pageTitle = "The Marathon Mix";
 
-export default function Mix(props: IMix) {
   return (
-    <>
+    <Main opaque>
       <Head>
-        <title>The Marathon Mix</title>
+        <title>{pageTitle}</title>
         <meta name="description" content="Good Tunes" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Layout
-        aside={<Aside />}
-        main={<MixContent items={props.playlist} />}
-      />
-    </>
+      <h2 className="text-5xl text-gt-orange">{pageTitle}</h2>
+      <Spacer size={8} />
+      <table className="md:table-auto w-full">
+          <tbody className="flex flex-col md:table-row-group">
+          {playlist.map(({ track }) => <TrackListItem key={track.id} artists={track.artists} name={track.name} id={track.id} />)}
+          </tbody>
+      </table>
+    </Main>
   );
 }
 

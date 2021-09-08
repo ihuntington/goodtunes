@@ -1,4 +1,4 @@
-export const Layout: React.FC<{ aside: React.ReactNode; main: React.ReactNode }> = ({ aside, main }) => {
+export const Layout: React.FC<{ aside: React.ReactNode }> = ({ aside, children }) => {
     return (
         <div className="container mx-auto h-full">
             <div className="p-2 h-full">
@@ -7,7 +7,7 @@ export const Layout: React.FC<{ aside: React.ReactNode; main: React.ReactNode }>
                         {aside}
                     </div>
                     <div className="md:col-span-8 lg:col-span-9 grid">
-                        {main}
+                        {children}
                     </div>
                 </div>
             </div>
