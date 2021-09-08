@@ -1,6 +1,8 @@
 import Head from 'next/head'
 import Link from "next/link";
+import Image from "next/image";
 import { Main, Copy, Spacer, TextLinkButton, CloseButton } from '../components';
+import Stonewall from "../public/stonewall.png";
 
 export default function Why() {
     const pageTitle = "Why am I doing this?";
@@ -27,8 +29,16 @@ export default function Why() {
             <Copy>Thank you so so much. And thank you to everyone who previously supported me, you’re a big part of why I do this.</Copy>
             <Copy>Y<br />O<br />U<br /><br />A<br />R<br />E<br /><br />T<br />H<br />E<br /><br />B<br />E<br />S<br />T<br /><br />X</Copy>
             <Copy>Ben, Suisse, 39 ans, Lui, Gay.</Copy>
-            <Spacer size={4} />
+            <Spacer size={8} />
+            <div className="md:flex md:justify-between">
+            <Link href="https://www.stonewall.org.uk/">
+                <a target="_blank" className="inline-block">
+                    <Image src={Stonewall} alt="Stand for all - Stonewall" width="130" height="70" />
+                </a>
+            </Link>
+            <div className="h-8 md:none" />
             <TextLinkButton href="/donate">Give money + music</TextLinkButton>
+            </div>
         </Main>
     );
 }
