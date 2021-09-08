@@ -198,7 +198,7 @@ export const addTrackToPlaylist = async ({ token, trackId }: { token: string; tr
 
 export const getPlaylist = async ({ token, playlistId }: AccessToken & { playlistId: string }) => {
     const params = new URLSearchParams();
-    params.append("fields", "tracks.items(track(name, artists(name)))");
+    params.append("fields", "tracks.items(track(name, artists(name), id))");
 
     const url = urljoin(process.env.SPOTIFY_API_URL as string, "/v1/playlists/", playlistId, `?${params.toString()}`);
 

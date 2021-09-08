@@ -32,13 +32,13 @@ export const SearchForm: React.FC<ISearchForm> = ({ onSubmit, onReset }) => {
                     type="search"
                     id="q"
                     name="q"
-                    className="text-2xl p-2 border-0 border-b border-gt-green w-full bg-transparent appearance-none"
+                    className="text-2xl p-2 border-0 border-b border-gt-pink w-full bg-transparent appearance-none"
                     onChange={handleChange}
                     value={query}
                     placeholder="Search for song or artist"
                 />
             </div>
-            <button type="submit" className="p-2 border-b border-gt-green flex-none text-gt-blue">
+            <button type="submit" className="p-2 border-b border-gt-pink flex-none text-gt-blue hover:text-gt-light-blue focus:text-gt-light-blue">
                 <span className="sr-only">Search</span>
                 <SearchIcon />
             </button>
