@@ -120,6 +120,9 @@ export const addTrackToPlaylist = async ({ token, trackId }: { token: string; tr
             body: JSON.stringify({ uris: [`spotify:track:${trackId}`] }),
         });
 
+        console.info("Spotify.addTrackToPlaylist");
+        console.log(response);
+
         if (!response.ok) {
             return null
         }

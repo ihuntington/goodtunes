@@ -38,6 +38,8 @@ export default function DonateThankYou({ donation }: IDonateThankYou) {
 export const getServerSideProps: GetServerSideProps = async ({ query, req }) => {
     const { jgDonationId, spotifyId } = query;
 
+    console.info(`Thank You: jgDonationId=${jgDonationId} spotifyId=${spotifyId}`);
+
     if (!jgDonationId || !spotifyId) {
         return {
             props: { donation: null },
@@ -45,6 +47,9 @@ export const getServerSideProps: GetServerSideProps = async ({ query, req }) => 
     }
 
     const jgDonation = await getDonationById(query.jgDonationId as string);
+
+    console.info(`Thank You: donation by id`)
+    console.log(jgDonation);
 
     if (!jgDonation) {
         return {
@@ -68,13 +73,18 @@ export const getServerSideProps: GetServerSideProps = async ({ query, req }) => 
         },
     });
 
+    console.info("Thank You: upsert donation");
+    console.log(donation);
+
     const user = await prisma.user.findFirst({
         where: {
             spotifyId: process.env.SPOTIFY_USER_ID as string,
         },
     });
 
+
     if (user) {
+        console.info("Thank You: found user");
         const token = await Spotify.refreshToken(user.token as Spotify.SpotifyToken);
 
         await prisma.user.update({
