@@ -1,6 +1,6 @@
 export const Layout: React.FC<{ aside: React.ReactNode }> = ({ aside, children }) => {
     return (
-        <div style={{ display: "grid", gridTemplateColumns: "10px 1fr 10px", gridTemplateRows: "10px 1fr 10px" }}>
+        <div className="h-full" style={{ display: "grid", gridTemplateColumns: "10px 1fr 10px", gridTemplateRows: "10px 1fr 10px" }}>
             <div className="mx-auto h-full" style={{ gridColumnStart: "2", gridRowStart: "2" }} >
                 <div className="p-2 h-full">
                     <div className="md:grid md:grid-cols-12 md:gap-8 h-full">

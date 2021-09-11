@@ -16,6 +16,9 @@ module.exports = {
                 'gt-light-blue': '#75d7ef',
                 'gt-brown': '#6f4721',
                 'gt-grey': '#6f4721',
+            },
+            height: {
+                'gt-main': 'calc(100vh - 36px)'
             }
         },
     },
