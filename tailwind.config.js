@@ -17,9 +17,16 @@ module.exports = {
                 'gt-brown': '#6f4721',
                 'gt-grey': '#6f4721',
             },
+            gridTemplateColumns: {
+                'gt-frame': '10px 1fr 10px',
+                'gt-layout': 'minmax(300px, 25%) 1fr',
+            },
+            gridTemplateRows: {
+                'gt-frame': '10px 1fr 10px',
+            },
             height: {
-                'gt-main': 'calc(100vh - 36px)'
-            }
+                'gt-main': 'calc(100vh - 20px)'
+            },
         },
     },
     variants: {

@@ -43,7 +43,6 @@ export const Aside = ({ hide = false }) => {
         <Totaliser />
         <div className="h-8"></div>
         <p>Powered by Good Tunes</p>
-        <div className="h-8"></div>
       </div>
     </div>
   );
