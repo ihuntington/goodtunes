@@ -1,6 +1,6 @@
 import { GetServerSideProps } from "next";
 import Head from 'next/head'
-import { Main, Spacer, CloseButton } from '../components'
+import { Main, Spacer, CloseButton, TextLinkButton } from '../components'
 import * as Spotify from "../services/spotify";
 import prisma from "../lib/prisma";
 
@@ -58,6 +58,9 @@ export default function Mix({ playlist }: IMix) {
           {playlist.map(({ track }) => <TrackListItem key={track.id} artists={track.artists} name={track.name} id={track.id} />)}
           </tbody>
       </table>
+      <Spacer size={8} />
+      <TextLinkButton href="/donate">Give money + music</TextLinkButton>
+      <Spacer size={4} />
     </Main>
   );
 }
