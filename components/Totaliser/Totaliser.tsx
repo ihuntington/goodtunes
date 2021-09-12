@@ -35,7 +35,7 @@ export const Totaliser = () => {
         <div>
             <p className="text-2xl text-gt-green">Ben’s reached...</p>
             <div className="h-4"></div>
-            <p className="text-5xl text-gt-green">
+            <p className="text-5xl text-gt-green font-bold">
                 {`£${raised}`}
             </p>
             <div className="h-4"></div>

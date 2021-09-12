@@ -12,7 +12,7 @@ export const Aside = ({ hide = false }) => {
       <div className="px-8 md:px-0">
         <h1 className="text-5xl">
           <Link href="/mix">
-            <a className="text-gt-red focus:text-gt-pink hover:text-gt-pink">
+            <a className="text-gt-red focus:text-gt-pink hover:text-gt-pink font-bold">
               <span className="block border-b-8 border-gt-pink py-1.5">Ben’s</span>
               <span className="block border-b-8 border-gt-pink py-1.5">London</span>
               <span className="block border-b-8 border-gt-pink py-1.5">Marathon</span>

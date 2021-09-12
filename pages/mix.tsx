@@ -50,7 +50,7 @@ export default function Mix({ playlist }: IMix) {
         <meta name="description" content="Good Tunes" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <h2 className="text-5xl text-gt-orange">{pageTitle}</h2>
+      <h2 className="text-5xl text-gt-orange font-bold">{pageTitle}</h2>
       <CloseButton />
       <Spacer size={8} />
       <table className="md:table-auto w-full">
