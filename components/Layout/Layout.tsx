@@ -1,6 +1,9 @@
-export const Layout: React.FC<{ aside: React.ReactNode }> = ({ aside, children }) => {
+import cx from "classnames";
+
+export const Layout: React.FC<{ aside: React.ReactNode, hasFont?: boolean }> = ({ aside, children, hasFont = false }) => {
+
     return (
-        <div className="h-full grid grid-cols-gt-frame grid-rows-gt-frame">
+        <div className={cx("h-full grid grid-cols-gt-frame grid-rows-gt-frame", { "font-body": hasFont })}>
             <div className="mx-auto h-full w-full col-start-2 row-start-2" >
                 <div className="p-2 md:p-0 h-full">
                     <div className="md:grid md:grid-cols-gt-layout h-full">

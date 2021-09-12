@@ -1,3 +1,11 @@
+@font-face {
+  font-family: "Founders Grotesk";
+  src: url("/fonts/founders-grotesk-web-light.woff2");
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+}
+
 html {
   height: 100%;
 }

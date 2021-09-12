@@ -17,6 +17,9 @@ module.exports = {
                 'gt-brown': '#6f4721',
                 'gt-grey': '#6f4721',
             },
+            fontFamily: {
+                'body': ['Founders Grotesk'],
+            },
             gridTemplateColumns: {
                 'gt-frame': '10px 1fr 10px',
                 'gt-layout': 'minmax(300px, 25%) 1fr',
