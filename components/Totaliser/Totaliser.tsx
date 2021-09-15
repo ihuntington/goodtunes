@@ -40,7 +40,7 @@ export const Totaliser = () => {
             </p>
             <div className="h-4"></div>
             <div className="relative">
-                <div className="h-6 bg-gt-green" style={{ width: `${raisedPercent}%`}}></div>
+                <div className="h-6 bg-gt-green transition-transform origin-left duration-300" style={{ transform: `scaleX(${raisedPercent / 100})`}}></div>
                 <div className="h-6 w-full bg-gt-green opacity-20 absolute top-0"></div>
             </div>
             <div className="h-4"></div>
