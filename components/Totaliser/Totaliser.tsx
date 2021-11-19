@@ -46,7 +46,7 @@ export const Totaliser = () => {
                 <div className="h-6 w-full bg-gt-green opacity-20 absolute top-0"></div>
             </div>
             <div className="h-4"></div>
-            <p className="text-gt-green">{`${daysRemaining} days to go`}</p>
+            {daysRemaining > 0 ? <p className="text-gt-green">{`${daysRemaining} days to go`}</p> : null}
         </div>
     );
 };
