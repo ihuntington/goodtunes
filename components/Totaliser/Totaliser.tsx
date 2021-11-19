@@ -22,7 +22,9 @@ export const Totaliser = () => {
         fetch("/api/fundraiser")
             .then((response) => response.json())
             .then((fundraiser: IFundraiser) => {
-                setRaisedPercent(parseInt(fundraiser.totalRaisedPercentageOfFundraisingTarget, 10))
+                const totalPercent = parseInt(fundraiser.totalRaisedPercentageOfFundraisingTarget, 10);
+                const clampedTotalPercent = Math.min(Math.max(0, totalPercent), 100);
+                setRaisedPercent(clampedTotalPercent);
                 setRaised(parseInt(fundraiser.grandTotalRaisedExcludingGiftAid, 10));
             })
             .catch((err) => {
