@@ -1,8 +1,6 @@
-import { GetServerSideProps } from "next";
 import Head from 'next/head'
 import { Main, Spacer, CloseButton, TextLinkButton } from '../components'
-import * as Spotify from "../services/spotify";
-import prisma from "../lib/prisma";
+import { useEffect,  useState } from "react";
 
 export interface IArtist {
   id: string;
@@ -15,10 +13,8 @@ export interface ITrack {
   name: string;
 }
 
-interface IMix {
-  playlist: {
-    track: ITrack;
-  }[];
+export interface IItem {
+  track: ITrack;
 }
 
 const Artists = ({ artists }: { artists: IArtist[] }) => (
@@ -40,8 +36,29 @@ const TrackListItem: React.FC<ITrack> = ({ artists, name }) => {
   );
 };
 
-export default function Mix({ playlist }: IMix) {
+export default function Mix() {
   const pageTitle = "The Marathon Mix";
+  const [tracks, setTracks] = useState<IItem[]>([]);
+  const [total, setTotal] = useState(0);
+  const [offset, setOffset] = useState(0);
+
+  useEffect(() => {
+    fetch("/api/mix")
+      .then((res) => res.json())
+      .then((data) => {
+        setTracks(data.items);
+        setTotal(data.total);
+        setOffset(data.offset + data.limit);
+      });
+  }, []);
+
+  const loadMore = () => {
+    fetch(`/api/mix?limit=${100}&offset=${offset}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setTracks(tracks.concat(data.items));
+      });
+  };
 
   return (
     <Main opaque>
@@ -53,52 +70,26 @@ export default function Mix({ playlist }: IMix) {
       <h2 className="text-5xl text-gt-orange font-bold">{pageTitle}</h2>
       <CloseButton />
       <Spacer size={8} />
-      <table className="md:table-auto w-full">
-          <tbody className="flex flex-col md:table-row-group">
-          {playlist.map(({ track }) => <TrackListItem key={track.id} artists={track.artists} name={track.name} id={track.id} />)}
-          </tbody>
-      </table>
+      {tracks.length > 0 && (
+        <table className="md:table-auto w-full">
+            <tbody className="flex flex-col md:table-row-group">
+            {tracks.map(({ track }) => {
+              return <TrackListItem key={track.id} artists={track.artists} name={track.name} id={track.id} />
+            })}
+            </tbody>
+        </table>
+      )}
+      {
+        tracks.length < total ? (
+          <>
+            <Spacer size={8} />
+            <button type="button" onClick={loadMore}>Load more</button>
+          </>
+        ) : null
+      }
       <Spacer size={8} />
       <TextLinkButton href="/donate">Give money + music</TextLinkButton>
       <Spacer size={4} />
     </Main>
   );
 }
-
-export const getServerSideProps: GetServerSideProps = async ({ query, req }) => {
-  const user = await prisma.user.findUnique({
-    where: {
-      spotifyId: process.env.SPOTIFY_USER_ID as string,
-    },
-  });
-
-  if (!user) {
-    return {
-      props: { playlist: [] },
-    };
-  }
-
-  const token = await Spotify.refreshToken(user.token as Spotify.SpotifyToken);
-
-  await prisma.user.update({
-      where: {
-          id: user.id,
-      },
-      data: {
-          token: {
-              ...(user.token as {}),
-              access_token: token?.access_token,
-          },
-      },
-  });
-
-  const playlistId = process.env.SPOTIFY_PLAYLIST_ID as string;
-
-  const playlist = await Spotify.getPlaylist({ token: token?.access_token as string, playlistId });
-
-  return {
-    props: {
-      playlist: playlist.tracks.items,
-    },
-  };
-};

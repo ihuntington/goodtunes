@@ -199,11 +199,12 @@ export const addTrackToPlaylist = async ({ token, trackId }: { token: string; tr
 //     }
 // }
 
-export const getPlaylist = async ({ token, playlistId }: AccessToken & { playlistId: string }) => {
+export const getPlaylist = async ({ token, playlistId, offset = 0 }: AccessToken & { playlistId: string; offset: number }) => {
     const params = new URLSearchParams();
-    params.append("fields", "tracks.items(track(name, artists(name), id))");
+    params.append("offset", offset.toString());
+    params.append("fields", "items(track(name, artists(name), id)),href,limit,next,offset,previous,total");
 
-    const url = urljoin(process.env.SPOTIFY_API_URL as string, "/v1/playlists/", playlistId, `?${params.toString()}`);
+    const url = urljoin(process.env.SPOTIFY_API_URL as string, "/v1/playlists/", playlistId, "tracks", `?${params.toString()}`);
 
     try {
         const response = await fetch(url, {
@@ -213,7 +214,8 @@ export const getPlaylist = async ({ token, playlistId }: AccessToken & { playlis
         });
 
         if (response.ok) {
-            return await response.json();
+            const data = await response.json();
+            return data;
         }
 
         return null;
